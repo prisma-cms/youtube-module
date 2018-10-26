@@ -13,10 +13,14 @@
   },
   "dependencies": {
     "@prisma-cms/prisma-module": "^1.1.0-beta",
+    "merge-graphql-schemas": "^1.5.7",
     "chalk": "^2.4.1"
   },
   "devDependencies": {
-    "@prisma-cms/server": "^2.1.1-beta"
+    "@prisma-cms/server": "^2.1.4-beta"
+  },
+  "resolutions": {
+    "graphql": "14.0.2"
   },
   "author": "Fi1osof",
   "license": "MIT",
