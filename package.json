@@ -1,13 +1,14 @@
 {
   "name": "@prisma-cms/module-bilerplate",
   "description": "Module boilerplate for @prisma-cms/server",
-  "version": "1.1.0-beta",
+  "version": "1.1.1-beta",
   "main": "src/",
   "files": [
     "src"
   ],
   "scripts": {
     "start": "action=start-server node --experimental-modules src/server",
+    "start-dev": "action=start-server nodemon --experimental-modules src/server",
     "deploy": "NODE_ENV=test node --experimental-modules src/server/scripts/deploy/with-prisma",
     "build-api": "node --experimental-modules src/server/scripts/deploy/api-only",
     "test": "NODE_OPTIONS=\"--experimental-modules\" yarn mocha --delay src/__tests__/"
@@ -20,7 +21,8 @@
   "devDependencies": {
     "@prisma-cms/server": "^2.1.6-beta",
     "expect": "^23.6.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.5"
   },
   "resolutions": {
     "graphql": "14.0.2"
