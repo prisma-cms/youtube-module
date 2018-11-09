@@ -19,14 +19,14 @@
     "merge-graphql-schemas": "latest"
   },
   "devDependencies": {
-    "graphql": "latest",
     "@prisma-cms/server": "latest",
     "expect": "^23.6.0",
+    "graphql": "*",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.5"
   },
   "resolutions": {
-    "graphql": "latest"
+    "graphql": "*"
   },
   "author": "Fi1osof",
   "license": "MIT",
