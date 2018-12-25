@@ -1,3 +1,7 @@
+1.1.5
+===============================
+- Upgraded nodemon
+
 1.1.4
 ===============================
 - getApiSchema() now get prisma schema from current module dir only

@@ -1,7 +1,7 @@
 {
   "name": "@prisma-cms/module-bilerplate",
   "description": "Module boilerplate for @prisma-cms/server",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "main": "src/",
   "files": [
     "src"
@@ -23,7 +23,7 @@
     "expect": "^23.6.0",
     "graphql": "*",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.5"
+    "nodemon": "latest"
   },
   "resolutions": {
     "graphql": "*"
