@@ -1,6 +1,6 @@
 
 input YoutubeChannelFeedWhereInput {
-  channel_id: String
+  channel: String
   user: String
-  playlist_id: String
+  playlist: String
 }

@@ -104,14 +104,44 @@ class Module extends PrismaModule {
   async YoutubeChannelFeed(source, args, ctx, info) {
 
     const {
-      where,
+      where: {
+        user,
+        playlist: playlist_id,
+        channel: channel_id,
+      },
     } = args;
 
     // console.log("YoutubeChannelFeed where", where);
 
     let uri = new URI("https://www.youtube.com/feeds/videos.xml");
 
-    uri = uri.query(where);
+    let where;
+
+    if (user) {
+      where = {
+        user,
+      };
+    }
+    else if (playlist_id) {
+      where = {
+        playlist_id,
+      };
+    }
+    else if (channel_id) {
+      where = {
+        channel_id,
+      };
+    }
+    else {
+
+      throw new Error("user or playlist or channel is required");
+    }
+
+    uri = uri.query({
+      user,
+      playlist_id,
+      channel_id,
+    });
 
     let result;
 
@@ -121,13 +151,24 @@ class Module extends PrismaModule {
 
         // console.log("YoutubeChannelFeed str", xml);
 
-        var json = xmlParser.toJson(xml);
+        let json;
 
+        try {
+          json = xmlParser.toJson(xml);
+        }
+        catch (error) {
 
-        // console.log("YoutubeChannelFeed json type",  typeof json);
+          console.error(json);
+
+          throw (error);
+        }
 
         if (json) {
           result = JSON.parse(json);
+        }
+        else {
+
+          throw new Error("Can not get data");
         }
 
       });
