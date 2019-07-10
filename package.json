@@ -1,7 +1,7 @@
 {
-  "name": "@prisma-cms/module-bilerplate",
-  "description": "Module boilerplate for @prisma-cms/server",
-  "version": "1.1.5",
+  "name": "@prisma-cms/youtube-module",
+  "description": "Youtube module for @prisma-cms/server",
+  "version": "1.2.0",
   "main": "src/",
   "files": [
     "src"
@@ -16,7 +16,9 @@
   "dependencies": {
     "@prisma-cms/prisma-module": "latest",
     "chalk": "^2.4.1",
-    "merge-graphql-schemas": "latest"
+    "merge-graphql-schemas": "latest",
+    "urijs": "^1.19.1",
+    "xml2json": "^0.11.2"
   },
   "devDependencies": {
     "@prisma-cms/server": "latest",
@@ -40,10 +42,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/prisma-cms/module-boilerplate.git"
+    "url": "git+https://github.com/prisma-cms/youtube-module.git"
   },
   "bugs": {
-    "url": "https://github.com/prisma-cms/module-boilerplate/issues"
+    "url": "https://github.com/prisma-cms/youtube-module/issues"
   },
-  "homepage": "https://github.com/prisma-cms/module-boilerplate#readme"
+  "homepage": "https://github.com/prisma-cms/youtube-module#readme"
 }

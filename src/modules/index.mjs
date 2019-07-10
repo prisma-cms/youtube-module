@@ -9,6 +9,10 @@ import MergeSchema from 'merge-graphql-schemas';
 
 import path from 'path';
 
+import URI from "urijs";
+
+import xmlParser from 'xml2json';
+
 const moduleURL = new URL(import.meta.url);
 
 const __dirname = path.dirname(moduleURL.pathname);
@@ -17,7 +21,7 @@ const { createWriteStream, unlinkSync } = fs;
 
 const { fileLoader, mergeTypes } = MergeSchema
 
-
+// console.log("xmlParser", xmlParser);
 
 class Module extends PrismaModule {
 
@@ -79,20 +83,56 @@ class Module extends PrismaModule {
 
   getResolvers() {
 
-    const resolvers = super.getResolvers();
+    const {
+      Query,
+      Mutation,
+      Subscription,
+      ...resolvers
+    } = super.getResolvers();
 
 
-    Object.assign(resolvers.Query, this.Query);
+    return {
+      ...resolvers,
+      Query: {
+        ...Query,
+        YoutubeChannelFeed: this.YoutubeChannelFeed.bind(this),
+      },
+    };
+  }
 
-    Object.assign(resolvers.Mutation, this.Mutation);
 
-    Object.assign(resolvers.Subscription, this.Subscription);
+  async YoutubeChannelFeed(source, args, ctx, info) {
+
+    const {
+      where,
+    } = args;
+
+    // console.log("YoutubeChannelFeed where", where);
+
+    let uri = new URI("https://www.youtube.com/feeds/videos.xml");
+
+    uri = uri.query(where);
+
+    let result;
+
+    await fetch(uri.toString())
+      .then(response => response.text())
+      .then(xml => {
+
+        // console.log("YoutubeChannelFeed str", xml);
+
+        var json = xmlParser.toJson(xml);
 
 
-    Object.assign(resolvers, {
-    });
+        // console.log("YoutubeChannelFeed json type",  typeof json);
 
-    return resolvers;
+        if (json) {
+          result = JSON.parse(json);
+        }
+
+      });
+
+    return result
   }
 
 

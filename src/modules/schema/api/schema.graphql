@@ -1,0 +1,8 @@
+
+scalar Json
+
+type Query {
+  YoutubeChannelFeed(
+    where: YoutubeChannelFeedWhereInput!
+  ): Json
+}
