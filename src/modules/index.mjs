@@ -95,13 +95,14 @@ class Module extends PrismaModule {
       ...resolvers,
       Query: {
         ...Query,
-        YoutubeChannelFeed: this.YoutubeChannelFeed.bind(this),
+        getYoutubeChannelFeed: this.getYoutubeChannelFeed.bind(this),
+        getYoutubeVideoInfo: this.getYoutubeVideoInfo.bind(this),
       },
     };
   }
 
 
-  async YoutubeChannelFeed(source, args, ctx, info) {
+  async getYoutubeChannelFeed(source, args, ctx, info) {
 
     const {
       where: {
@@ -111,7 +112,7 @@ class Module extends PrismaModule {
       },
     } = args;
 
-    // console.log("YoutubeChannelFeed where", where);
+    // console.log("getYoutubeChannelFeed where", where);
 
     let uri = new URI("https://www.youtube.com/feeds/videos.xml");
 
@@ -149,7 +150,7 @@ class Module extends PrismaModule {
       .then(response => response.text())
       .then(xml => {
 
-        // console.log("YoutubeChannelFeed str", xml);
+        // console.log("getYoutubeChannelFeed str", xml);
 
         let json;
 
@@ -172,6 +173,49 @@ class Module extends PrismaModule {
         }
 
       });
+
+    return result
+  }
+
+
+  async getYoutubeVideoInfo(source, args, ctx, info) {
+
+    const {
+      where: {
+        url,
+      },
+    } = args;
+
+    // console.log("getYoutubeChannelFeed where", where);
+
+    let uri = new URI("https://noembed.com/embed");
+
+    let where;
+
+    uri = uri.query({
+      url,
+    });
+
+    // console.log("getYoutubeVideoInfo uri", uri.toString());
+
+    let result;
+
+    result = await fetch(uri.toString())
+      .then(response => response.json())
+      // .then(json => {
+
+      //   // console.log("getYoutubeChannelFeed json", json);
+
+      //   return json;
+      // });
+
+    const {
+      error,
+    } = result || {};
+
+    if (error) {
+      throw new Error(error);
+    }
 
     return result
   }

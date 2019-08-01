@@ -1,3 +1,8 @@
+1.2.2
+===============================
+- Added getYoutubeVideoInfo
+- Rename YoutubeChannelFeed to getYoutubeChannelFeed
+
 1.2.1
 ===============================
 - Fix search condition

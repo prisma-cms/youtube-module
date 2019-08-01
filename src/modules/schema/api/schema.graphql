@@ -2,7 +2,15 @@
 scalar Json
 
 type Query {
-  YoutubeChannelFeed(
+  
+  """Получаем фид по каналу или пользователю"""
+  getYoutubeChannelFeed(
     where: YoutubeChannelFeedWhereInput!
   ): Json
+  
+  """Информация по видео"""
+  getYoutubeVideoInfo(
+    where: YoutubeVideoRemoteWhereUniqueInput!
+  ): Json
+
 }
